@@ -1,0 +1,43 @@
+.card{
+    width: 500px;
+    max-width: 90%;
+    min-height: 300px;
+    padding: 30px;
+    text-align: center;
+    background: #1d1d1d;
+    border-radius: 20px;
+}
+
+.headingWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.heading{
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.text{
+    font-size: 22px;
+    line-height: 1.6;
+    color: #C4C5C5;
+    margin-bottom: 30px;
+}
+
+.cardWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3.5rem;
+}
+
+.signInWrapper{
+    margin-top: 20px;
+}
+.hasInvite{
+    color: #0077FF;
+}
