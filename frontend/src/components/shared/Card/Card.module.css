@@ -5,7 +5,10 @@
     background: #1D1D1D;
     padding: 30px;
     border-radius: 20px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
 }
 .headingWrapper{

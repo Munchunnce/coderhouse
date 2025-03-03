@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Home.module.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Card from '../../components/shared/Card/Card';
 import Button from '../../components/shared/Button/Button';
 
@@ -8,19 +8,19 @@ import Button from '../../components/shared/Button/Button';
 
 const Home = () => {
 
-    const signInLinkStyle = {
-        color: '#0077ff',
-        fontWeight: 'bold',
-        textDecoration: 'none',
-        marginLeft: '10px'
+    // const signInLinkStyle = {
+    //     color: '#0077ff',
+    //     fontWeight: 'bold',
+    //     textDecoration: 'none',
+    //     marginLeft: '10px'
 
-    }
+    // }
 
     const navigate = useNavigate();
 
     const startRegister = () => {
         console.log('Vimal')
-        navigate('/register');
+        navigate('/authenticate');
     }
 
     return (
@@ -32,7 +32,7 @@ const Home = () => {
             <Button onClick={startRegister} text="Let's Go"/>
             <div className={styles.signInWrapper}>
                 <span className={styles.hasInvite}>Have an invite text?</span>
-                <Link style={signInLinkStyle} to='/login'>Sign In</Link>
+                {/* <Link style={signInLinkStyle} to='/login'>Sign In</Link> */}
             </div>
             </Card>
 
