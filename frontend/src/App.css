@@ -64,3 +64,17 @@ color: #fff;
   max-width: 90%;
   margin: 0 auto;
 }
+
+.cardWrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 140px);
+}
+
+.paragraph{
+  color: #c4c4c4;
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 20px;
+} 

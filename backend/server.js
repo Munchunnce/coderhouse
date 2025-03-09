@@ -4,6 +4,10 @@ const app = express();
 const DbConnect = require('./database');
 const router = require('./routes');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
+
+
+app.use(cookieParser());
 
 const corsOption = {
     credentials: true,
@@ -11,11 +15,12 @@ const corsOption = {
 };
 
 app.use(cors(corsOption));
+app.use('/storage',express.static('storage'));
 
 
 const PORT = process.env.PORT || 5500;
 DbConnect();
-app.use(express.json())  // express.json() ye mera middleware hai ye inbult aati hai 
+app.use(express.json({ limit: '8mb'}))  // express.json() ye mera middleware hai ye inbuilt aati hai 
 app.use(router);
 
 app.get('/', (req, res) => {

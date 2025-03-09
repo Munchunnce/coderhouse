@@ -38,7 +38,7 @@ const StepOtp = () => {
               By entring your number , you're agreeing to our terms of Service and Privacy Policy. Thanks!
           </p>
         </div>    
-      </Card>
+        </Card>
       </div>
   )
 }
