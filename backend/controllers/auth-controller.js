@@ -70,7 +70,7 @@ class AuthController {
         // Token Service:
         const {accessToken, refreshToken } = tokenService.genrateTokens({ _id: user._id, activated: false });
 
-        await tokenService.storeRefreshToke(refreshToken, user.id);
+        await tokenService.storeRefreshToken(refreshToken, user.id);
         // cookies store
         res.cookie('refreshToken', refreshToken, {
             maxAge: 1000 * 60 * 60 * 24 * 30,
@@ -85,6 +85,64 @@ class AuthController {
         const userDto = new UserDto(user);
         res.json({ user: userDto, auth: true });
         
+    }
+
+    // refreshTokens
+    async refresh(req, res) {
+        // get refresh token from cookie
+        const { refreshToken: refreshTokenFromCookie } = req.cookies;
+        // check if refresh token is valid
+        let userData;
+        try{
+            userData = await tokenService.verifyRefreshToken(refreshTokenFromCookie);
+            if(!userData){
+                return res.status(401).json({ message: 'Invalid Token' });
+            }
+        } catch(err){
+            return res.status(401).json({ message: 'Invalid Token' });
+        }
+
+        // check if token is in DB
+        try {
+            const token = await tokenService.findRefreshToken(userData._id, refreshTokenFromCookie);
+            if(!token){
+                return res.status(401).json({ message: 'Invalid Token'});
+            }
+        } catch (err) {
+            return res.status(500).json({ message: 'Internal Error Db'});
+        }
+
+        // check if valid user
+        const user = await userService.findUser({ _id: userData._id });
+        if(!user){
+            return res.status(401).json({ message: 'Invalid User' });
+        }
+
+        // generate new tokens
+        const {refreshToken ,accessToken} = tokenService.genrateTokens({ _id: userData._id, });
+
+        // update refresh token
+        try{
+            await tokenService.updateRefreshToken(userData._id, refreshToken);
+        } catch(err){
+            return res.status(500).json({ message: 'Internal Error Db'});
+        }
+
+        // put in cookie
+        res.cookie('refreshToken', refreshToken, {
+            maxAge: 1000 * 60 * 60 * 24 * 30,
+            httpOnly: true
+        });
+
+        res.cookie('accessToken', accessToken, {
+            maxAge: 1000 * 60 * 60 * 24 * 30,
+            httpOnly: true
+        });
+
+        // response
+        const userDto = new UserDto(user);
+        res.json({ user: userDto, auth: true });
+
     }
 
 

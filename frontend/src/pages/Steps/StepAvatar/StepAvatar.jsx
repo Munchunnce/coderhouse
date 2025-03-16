@@ -9,7 +9,7 @@ import { setAuth } from '../../../store/authSlice';
 
 
 
-const StepAvatar = ({ onNext }) => {
+const StepAvatar = () => {
   const { name, avatar } = useSelector((state) => state.activate);
   const [image, setImage ] = useState('/images/monkey-avatar (1).png');
   const dispatch = useDispatch();
@@ -34,7 +34,6 @@ const StepAvatar = ({ onNext }) => {
     } catch (err) {
       console.log(err);
     }
-    // onNext();
   }
 
 
