@@ -17,12 +17,19 @@ const StepOtp = () => {
   const dispatch = useDispatch();
  
   async function submit() {
+    if(!otp || !phone || !hash) return alert('Please enter the otp');
+    if(otp.length !== 4) return alert('Please enter a valid otp');
     try {
       const { data } = await verifyOtp({ otp, phone, hash});
       console.log(data);
       dispatch(setAuth(data));
     } catch (err) {
         console.log(err);
+        if(err.response && err.response.status === 400){
+          alert('Invalid or expired OTP');
+        } else {
+          alert('An error occurred. Please try again.');
+        }  
     }
   }
 

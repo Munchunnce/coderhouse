@@ -27,6 +27,7 @@ const StepAvatar = () => {
   }
 
   async function submit() {
+    if(!name || !avatar) return alert('Please upload a photo');
     setLoading(true);
     try {
       const { data } = await activate({ name, avatar });

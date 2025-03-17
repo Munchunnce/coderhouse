@@ -16,6 +16,9 @@ const Phone = ({onNext}) => {
   const dispatch = useDispatch();
   
   async function submit() {
+    // validation
+    if(!phoneNumber) return alert('Please enter a phone number');
+    if(phoneNumber.length !== 10) return alert('Please enter a valid phone number');
     // server request
     const { data } = await sendOtp({ phone: phoneNumber});
     console.log(data);

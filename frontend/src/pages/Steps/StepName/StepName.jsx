@@ -14,7 +14,7 @@ const StepName = ({ onNext }) => {
 
   function nextStep() {
     if(!fullName){
-      return;
+      return alert('Please enter your full name');
     }
     dispatch(setName(fullName));
     onNext();
