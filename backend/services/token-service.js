@@ -39,7 +39,7 @@ class TokenService {
 
     // find refresh token
     async findRefreshToken(userId,refreshToken) {
-        return await refreshModel.findOne({_id: userId, token: refreshToken });
+        return await refreshModel.findOne({userId: userId, token: refreshToken });
     }
     
     // update refresh token
