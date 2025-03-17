@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import styles from './Navigation.module.css'
 import { logout } from '../../../http';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAuth } from '../../../store/authSlice';
 
 const Navigation = () => {
@@ -21,6 +21,7 @@ const Navigation = () => {
     }
 
     const dispatch = useDispatch();
+    const isAuth = useSelector(state => state.auth.isAuth);
 
     async function logoutUser() {
         try {
@@ -37,7 +38,7 @@ const Navigation = () => {
             <img src="/images/logo.png" alt="" />
             <span style={logoText}>CoderVimal</span>
         </Link>
-        <button onClick={logoutUser}>logout</button>
+        {   isAuth && <button onClick={logoutUser}>Logout</button>  }
     </nav>
   )
 }
