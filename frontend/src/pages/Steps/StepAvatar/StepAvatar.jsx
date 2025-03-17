@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setAvatar } from '../../../store/activateSlice';
 import { activate } from '../../../http';
 import { setAuth } from '../../../store/authSlice';
+import Loader from '../../../components/shared/Loader/Loader';
 
 
 
@@ -13,6 +14,7 @@ const StepAvatar = () => {
   const { name, avatar } = useSelector((state) => state.activate);
   const [image, setImage ] = useState('/images/monkey-avatar (1).png');
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   function catpureImage(e) {
     const file = e.target.files[0];
@@ -25,6 +27,7 @@ const StepAvatar = () => {
   }
 
   async function submit() {
+    setLoading(true);
     try {
       const { data } = await activate({ name, avatar });
       if(data.auth){
@@ -33,11 +36,13 @@ const StepAvatar = () => {
       console.log(data);
     } catch (err) {
       console.log(err);
+    }finally {
+      setLoading(false);
     }
   }
 
 
-
+  if(loading) { return <Loader message="Activating in progess..." /> }
   return (
     <>
       <Card title={`Okay, ${name}`} icon='monkey'>
