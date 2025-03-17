@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import Card from '../../../components/shared/Card/Card';
 import Button from '../../../components/shared/Button/Button';
 import styles from './StepAvatar.module.css';
@@ -15,6 +15,7 @@ const StepAvatar = () => {
   const [image, setImage ] = useState('/images/monkey-avatar (1).png');
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [unMounted, setUnMounted] = useState(false);
 
   function catpureImage(e) {
     const file = e.target.files[0];
@@ -32,7 +33,9 @@ const StepAvatar = () => {
     try {
       const { data } = await activate({ name, avatar });
       if(data.auth){
-        dispatch(setAuth(data));
+        if(!unMounted){
+          dispatch(setAuth(data));
+        }
       }
       console.log(data);
     } catch (err) {
@@ -41,6 +44,12 @@ const StepAvatar = () => {
       setLoading(false);
     }
   }
+
+  useEffect(() => {
+    return () => {
+      setUnMounted(true);
+    }
+  }, []);
 
 
   if(loading) { return <Loader message="Activating in progess..." /> }
