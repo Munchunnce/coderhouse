@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Rooms.module.css';
 import RoomCard from '../../components/RoomCard/RoomCard';
+import AddRoomModel from '../../components/AddRoomModel/AddRoomModel';
 
 const rooms = [
   {
@@ -38,7 +39,7 @@ const rooms = [
     totalPeople: 80,
   },
   {
-    id: 2,
+    id: 3,
     topic: 'Which framework is better for a startup?',
     speakers: [
       {
@@ -55,7 +56,7 @@ const rooms = [
     totalPeople: 80,
   },
   {
-    id: 2,
+    id: 4,
     topic: 'Which framework is better for a startup?',
     speakers: [
       {
@@ -74,6 +75,11 @@ const rooms = [
 ]
 
 const Rooms = () => {
+  const [isAddRoomModalOpen, setIsAddRoomModalOpen] = useState(false);
+
+  const openModel = () => {
+    setIsAddRoomModalOpen(true);
+  }
   return (
     <>
       <div className="container">
@@ -86,7 +92,7 @@ const Rooms = () => {
               </div>
             </div>
             <div className={styles.right}>
-                <button className={styles.startRoomButton}>
+                <button onClick={openModel} className={styles.startRoomButton}>
                   <img src="/images/add-room-icon.png" alt="add-room" />
                   <span>Start a room</span>
                 </button>
@@ -99,6 +105,7 @@ const Rooms = () => {
             ))}
         </div>
       </div>
+      {isAddRoomModalOpen && <AddRoomModel onClose={() => setIsAddRoomModalOpen(false)}/>}
     </>
   );
 };
