@@ -59,6 +59,12 @@ font-family: 'Nunito', sans-serif;
 background: #121212;
 color: #fff;
 }
+button{
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-weight: bold;
+}
 .container{
   width: 1200px;
   max-width: 90%;
