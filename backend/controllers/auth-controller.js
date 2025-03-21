@@ -10,7 +10,7 @@ class AuthController {
     async sendOtp(req, res) {
         const { phone } = req.body;  // yaha se mera phone number mil jayega
         if(!phone){
-            res.status(400).json({ message: 'Phone field is required!' });
+            return res.status(400).json({ message: 'Phone field is required!' });
         }
 
         const otp = await otpService.genrateOtp();
@@ -155,6 +155,31 @@ class AuthController {
         res.clearCookie('accessToken');
         res.json({ user: null, auth: false });
     }
+
+    // async logout(req, res) {
+    //     try {
+    //         const { refreshToken } = req.cookies;
+    
+    //         // Agar refreshToken exist nahi karta, to error return karein
+    //         if (!refreshToken) {
+    //             return res.status(400).json({ message: 'No refresh token found!' });
+    //         }
+    
+    //         // Refresh token ko database se remove karein
+    //         await tokenService.removeToken(refreshToken);
+    
+    //         // Cookies delete karein with proper security flags
+    //         res.clearCookie('refreshToken', { httpOnly: true, secure: true, sameSite: 'strict' });
+    //         res.clearCookie('accessToken', { httpOnly: true, secure: true, sameSite: 'strict' });
+    
+    //         return res.status(200).json({ user: null, auth: false, message: 'Logout successful' });
+    
+    //     } catch (error) {
+    //         console.error("Logout Error:", error);
+    //         return res.status(500).json({ message: 'Internal Server Error' });
+    //     }
+    // }
+    
 
 
 

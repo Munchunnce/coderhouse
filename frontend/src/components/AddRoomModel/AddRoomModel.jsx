@@ -1,10 +1,25 @@
 import React, { useState } from 'react';
 import styles from './AddRoomModel.module.css';
 import TextInput from '../shared/TextInput/TextInput';
+import { createRoom as create} from '../../http';
+import { useNavigate } from 'react-router-dom';
+
 
 const AddRoomModel = ({ onClose }) => {
     const [roomType, setRoomType] = useState('open');
     const [topic, setTopic] = useState('');
+    const navigate = useNavigate();
+
+    async function createRoom() {
+        // server call to create room
+        try {
+            if(!topic) return;
+            const { data } = await create({ topic, roomType });
+            navigate(`/room/${data.id}`);
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
 
   return (
     <div className={styles.modelMask}>
@@ -38,7 +53,7 @@ const AddRoomModel = ({ onClose }) => {
         </div>
         <div className={styles.modelFooter}>
             <h2 >Start a room, open to everyone</h2>
-            <button className={styles.footerButton}>
+            <button onClick={createRoom} className={styles.footerButton}>
                 <img src="/images/Emoji-cong.png" alt="Emoji-cong" />
                 <span>Let's go</span>
             </button>
