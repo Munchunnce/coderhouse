@@ -11,7 +11,7 @@ class AuthController {
         const { phone } = req.body;  // yaha se mera phone number mil jayega
         if(!phone){
             return res.status(400).json({ message: 'Phone field is required!' });
-        }
+        };
 
         const otp = await otpService.genrateOtp();
 
@@ -28,13 +28,13 @@ class AuthController {
                 hash: `${hash}.${expires}`,
                 phone,
                 otp,
-            })
+            });
         } catch(err){
             console.log(err);
             res.status(500).json({message: 'Otp sending failed Please checked!'});
         }
         // res.json({ hash: hash });
-    }
+    };
 
     // Verify OTP
     async verifyOtp(req, res) {
@@ -100,7 +100,7 @@ class AuthController {
             }
         } catch(err){
             return res.status(401).json({ message: 'Invalid Token' });
-        }
+        };
 
         // check if token is in DB
         try {
@@ -110,13 +110,13 @@ class AuthController {
             }
         } catch (err) {
             return res.status(500).json({ message: 'Internal Error Db'});
-        }
+        };
 
         // check if valid user
         const user = await userService.findUser({ _id: userData._id });
         if(!user){
             return res.status(401).json({ message: 'Invalid User' });
-        }
+        };
 
         // generate new tokens
         const {refreshToken ,accessToken} = tokenService.genrateTokens({ _id: userData._id, });
