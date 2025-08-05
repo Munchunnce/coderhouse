@@ -8,5 +8,12 @@ export const socketInit = () => {
         transports: ['websocket'],
     };
     
-    return io('http://localhost:5500', option);
+    const isProduction = process.env.NODE_ENV === 'production';
+
+    const backendURL = isProduction
+        ? 'https://coderhouse-psi.vercel.app'
+        : 'http://localhost:5000';  // or whatever your local server port is
+
+    return io(backendURL, option);
+    // return io('https://coderhouse-psi.vercel.app', option);
 }
