@@ -27,11 +27,11 @@ class RoomsController {
         return res.json(allRooms);
     }
 
-    // async show(req, res) {
-    //     const room = await roomService.getRoom(req.params.roomId);
+    async show(req, res) {
+        const room = await roomService.getRoom(req.params.roomId);
 
-    //     return res.json(room);
-    // }
+        return res.json(room);
+    }
 }
 
 module.exports = new RoomsController();
