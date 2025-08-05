@@ -74,12 +74,16 @@ class AuthController {
         // cookies store
         res.cookie('refreshToken', refreshToken, {
             maxAge: 1000 * 60 * 60 * 24 * 30,
-            httpOnly: true
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None'
         });
 
         res.cookie('accessToken', accessToken, {
             maxAge: 1000 * 60 * 60 * 24 * 30,
-            httpOnly: true
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None'
         });
 
         const userDto = new UserDto(user);
@@ -131,12 +135,16 @@ class AuthController {
         // put in cookie
         res.cookie('refreshToken', refreshToken, {
             maxAge: 1000 * 60 * 60 * 24 * 30,
-            httpOnly: true
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None'
         });
 
         res.cookie('accessToken', accessToken, {
             maxAge: 1000 * 60 * 60 * 24 * 30,
-            httpOnly: true
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None'
         });
 
         // response
@@ -151,8 +159,8 @@ class AuthController {
         // delete refresh token from db
         await tokenService.removeToken(refreshToken);
         // delete cookies
-        res.clearCookie('refreshToken');
-        res.clearCookie('accessToken');
+        res.clearCookie('refreshToken', { httpOnly: true, secure: true, sameSite: 'None' });
+        res.clearCookie('accessToken', { httpOnly: true, secure: true, sameSite: 'None' });
         res.json({ user: null, auth: false });
     }
 

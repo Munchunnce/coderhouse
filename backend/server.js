@@ -13,8 +13,9 @@ const ACTIONS = require('./action');
 
 const io = require('socket.io')(server, {
     cors: {
-        origin: 'http://localhost:3000',
+        origin: ['http://localhost:3000', 'https://coderhouse-front.vercel.app'],
         methods: ['GET', 'POST'],
+        credentials: true,
     },
 })
 
@@ -23,7 +24,9 @@ app.use(cookieParser());
 
 const corsOption = {
     credentials: true,
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:3000',
+        'https://coderhouse-front.vercel.app'  // ✅ Add Vercel frontend
+    ],
 };
 
 app.use(cors(corsOption));
