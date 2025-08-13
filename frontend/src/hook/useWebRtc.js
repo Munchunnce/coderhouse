@@ -82,7 +82,7 @@ export const useWebRtc = (roomId, user) => {
                     console.error("Media capture failed:", error);
                     localMediaStream.current = null; // Explicitly set to null on failure
                 }
-            }
+            };
             async function handleNewPeer({
                 peerId,
                 createOffer,
@@ -92,7 +92,7 @@ export const useWebRtc = (roomId, user) => {
                     return console.warn(
                         `You are already connected with ${peerId} (${user.name})`
                     );
-                }
+                };
 
                 // Store it to connections
                 connections.current[peerId] = new RTCPeerConnection({
