@@ -16,7 +16,7 @@ const io = require('socket.io')(server, {
         origin: 'http://localhost:3000',
         methods: ['GET', 'POST'],
     },
-})
+});
 
 
 app.use(cookieParser());
