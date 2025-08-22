@@ -217,7 +217,7 @@ export const useWebRtc = (roomId, user) => {
                 } catch (error) {
                     console.error(`Error in setting remote media for peerId: ${peerId}`, error);
                 }
-            }
+            };
             
 
 
@@ -243,10 +243,8 @@ export const useWebRtc = (roomId, user) => {
                 } catch (error) {
                     console.error(`Error adding received ICE candidate for peerId: ${peerId}`, error);
                 }
-            }
-            
-           
-            
+            };
+
             
             async function handleSetMute(mute, userId) {
                 if (!clientsRef.current || !Array.isArray(clientsRef.current)) {
