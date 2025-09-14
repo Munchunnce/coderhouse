@@ -179,7 +179,7 @@ export const useWebRtc = (roomId, user) => {
                 delete connections.current[peerId];
                 delete audioElements.current[peerId];
                 setClients((list) => list.filter((c) => c.id !== userId));
-            }
+            };
             // async function handleIceCandidate({ peerId, icecandidate }) {
             //     if (icecandidate) {
             //         connections.current[peerId].addIceCandidate(icecandidate);
