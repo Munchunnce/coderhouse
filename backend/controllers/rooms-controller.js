@@ -32,6 +32,6 @@ class RoomsController {
 
         return res.json(room);
     }
-}
+};
 
 module.exports = new RoomsController();
